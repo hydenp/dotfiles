@@ -1,0 +1,6 @@
+# system files to ignore
+.DS_Store
+
+# editor config files to ignore
+.vscode
+.idea

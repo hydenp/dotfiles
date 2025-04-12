@@ -1,0 +1,119 @@
+"" Source your .vimrc
+"source ~/.vimrc
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+
+" Do incremental searching.
+set incsearch
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
+
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+" MY CONFIGS ---------------------------------------------------
+
+" set leader key to space
+let mapleader = "\<SPACE>"
+
+" clear the search buffer when hitting return
+nnoremap <Leader>/ :nohlsearch<cr>
+
+
+" set hybrid line numbers
+:set relativenumber
+:set number
+
+
+" Shortcut for escape
+imap jj <Esc>
+imap jk <Esc>
+
+" move up and down half page and center
+nnoremap("<C-d>", "<C-d>zz)
+nnoremap("<C-u>", "<C-u>zz)
+
+" make leader + p paste not yank pasted over text into the register
+xnoremap("<leader>p", "\"_dP")
+
+" Put search results in the middle of the screen
+nnoremap n nzz
+nnoremap N Nzz
+
+" Quick window navigation
+map <C-J> <C-W>j
+map <C-K> <C-W>k
+map <C-L> <C-W>l
+map <C-H> <C-W>h
+
+
+" INTELLIJ IDEA SHORTCUTS ---------------
+
+" Open Terminal
+nmap <Leader>t :action ActivateTerminalToolWindow<CR>
+
+" Toggle ToggleDistractionFreeMode
+nmap <Leader>df :action ToggleDistractionFreeMode<CR>
+
+" Some Git Shortcuts for view status, pull, and branches
+" Mapping mimic Fugitive in my native vim
+" nmap <Leader>gs :action CheckinProject<CR>
+" nmap <Leader>gc :action CheckinProject<CR>
+nmap <Leader>ga :action Git.Add<CR>
+nmap <Leader>gl :action Git.Pull<CR>
+" nmap <Leader>gl :action Git.UpdateProject<CR>
+nmap <Leader>gp :action Git.Push<CR>
+" nmap <Leader>gn :action Annotate<CR>
+nmap <Leader>glog :action Git.Log<CR>
+nmap <Leader>br :action Git.Branches<CR>
+nmap <Leader>gb :action Git.Branches<CR>
+
+" Refactoring
+nmap <Leader>rt :action Refactorings.QuickListPopupAction<CR>
+"nmap csw' :action Macro.surround_with_single_quote<CR>
+
+" PLUGINS ---------------------------------------------------
+
+" add the replace with register plugin to replace into black hole register
+set ReplaceWithRegister
+
+" add multiple cursors plugin
+set multiple-cursors
+
+" support the surround plugin for surrounding text with characters
+set surround
+
+" add nerdtree plugin
+set NERDTree
+" nmap <Leader>nt :NERDTreeToggle<CR>
+nmap <Leader>nt :NERDTree<CR>
+nmap <Leader>nc :NERDTreeClose<CR>
+
+set easymotion
+map <Leader>F <Plug>(easymotion-s)
+map <Leader>f <Plug>(easymotion-f)
+
+
+" Move 1 more lines up or down in normal and visual selection modes.
+nnoremap K :m .-2<CR>==
+nnoremap J :m .+1<CR>==
+vnoremap K :m '<-2<CR>gv=gv
+vnoremap J :m '>+1<CR>gv=gv
+
+" activate terminal with control t
+nnoremap <c-t> :action ActivateTerminalToolWindow<CR>
