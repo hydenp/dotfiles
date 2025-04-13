@@ -47,12 +47,51 @@ update_warp_settings() {
     fi
 }
 
+# Function to update p10k settings
+update_p10k() {
+    local source_file="$HOME/.p10k.zsh"
+    local target_file=".p10k.zsh"
+
+    # Check if source file exists
+    if [[ ! -f "$source_file" ]]; then
+        echo "Error: p10k.zsh file not found at $source_file"
+        return 1
+    fi
+
+    # Copy the settings file
+    cp "$source_file" "$target_file"
+    
+    if [[ $? -eq 0 ]]; then
+        echo "Successfully updated p10k.zsh in dotfiles"
+    else
+        echo "Error: Failed to copy p10k.zsh"
+        return 1
+    fi
+}
+
+# Function to update Brewfile
+update_brew() {
+    local target_file="Brewfile"
+
+    # Generate new Brewfile using brew bundle dump
+    brew bundle dump --file "$target_file" --force
+    
+    if [[ $? -eq 0 ]]; then
+        echo "Successfully generated new Brewfile in dotfiles"
+    else
+        echo "Error: Failed to generate Brewfile"
+        return 1
+    fi
+}
+
 # Function to show usage
 show_usage() {
     echo "Usage: $0 <command>"
     echo "Available commands:"
     echo "  cursor    - Update Cursor settings"
-    echo "  warp    - Update Warp settings"
+    echo "  warp      - Update Warp settings"
+    echo "  p10k      - Update p10k settings"
+    echo "  brew      - Generate new Brewfile from current brew packages"
     # echo "  help      - Show this help message"
 }
 
@@ -63,6 +102,12 @@ case "$1" in
         ;;
     "warp")
         update_warp_settings
+        ;;
+    "p10k")
+        update_p10k
+        ;;
+    "brew")
+        update_brew
         ;;
     "help"|"")
         show_usage
