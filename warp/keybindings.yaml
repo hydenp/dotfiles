@@ -1,0 +1,4 @@
+---
+"pane_group:add_down": shift-cmd-H
+"pane_group:navigate_prev": ctrl-h
+"pane_group:add_right": shift-cmd-V
